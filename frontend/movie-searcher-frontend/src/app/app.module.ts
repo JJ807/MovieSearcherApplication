@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CommonModule, HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HomeComponent} from "./home/home.component";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MovieComponent} from './home/movie/movie.component';
@@ -16,13 +16,17 @@ import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {PersonComponent} from './home/person/person.component';
 import {RouterModule} from "@angular/router";
+import {SpinnerComponent} from "./home/spinner/spinner.component";
+import {SpinnerInterceptor} from "./spinner-service/spinner-interceptor";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MovieComponent,
-    PersonComponent
+    PersonComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -39,12 +43,18 @@ import {RouterModule} from "@angular/router";
     MatButtonModule,
     MatCardModule,
     MatDividerModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })
