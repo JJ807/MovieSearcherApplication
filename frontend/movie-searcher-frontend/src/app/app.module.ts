@@ -19,6 +19,7 @@ import {RouterModule} from "@angular/router";
 import {SpinnerComponent} from "./home/spinner/spinner.component";
 import {SpinnerInterceptor} from "./spinner-service/spinner-interceptor";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {OverlayModule} from "@angular/cdk/overlay";
 
 @NgModule({
   declarations: [
@@ -44,17 +45,19 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatCardModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    OverlayModule
   ],
   providers: [
     {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy
-    },
-    {
+      // provide: ErrorHandler, useClass: HandleErrorService
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,
       multi: true,
     },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
   ],
   bootstrap: [AppComponent]
 })

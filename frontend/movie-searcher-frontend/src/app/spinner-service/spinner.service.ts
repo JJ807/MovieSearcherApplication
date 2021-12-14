@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
-import {defer, NEVER} from "rxjs";
+import {defer, NEVER, of} from "rxjs";
 import {catchError, finalize, share} from "rxjs/operators";
 import {SpinnerComponent} from "../home/spinner/spinner.component";
 
@@ -18,6 +18,9 @@ export class SpinnerService {
   public readonly spinner$ = defer(() => {
     this.show();
     return NEVER.pipe(
+      catchError(() => {
+        return of(this.hide());
+      }),
       finalize(() => {
         this.hide();
       })
