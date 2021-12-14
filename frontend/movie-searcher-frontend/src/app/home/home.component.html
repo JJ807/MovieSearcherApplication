@@ -1,0 +1,109 @@
+<div style="height: 100%; overflow: auto;">
+  <mat-toolbar>
+    <h1 style="font-size: 40px;">Movie Searcher <span style="margin: 0;"
+                                                      class="material-icons">movie</span></h1>
+  </mat-toolbar>
+  <h2 style="text-align: center;">Search for a movie or person in a database (e.g. Apollo 13 / Tom Hanks)</h2>
+  <div
+    style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <form #searchForm="ngForm" role="search" id="search"
+          (ngSubmit)="getMovies(searchForm.value)">
+      <div
+        style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        <div style="padding-top: 1.34375em; margin-right: 1em;">
+          <mat-form-field appearance="fill">
+            <mat-label>Search for a movie</mat-label>
+            <input type="text" name="search" matInput ngModel required>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="accent"
+                  type="submit">Search
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <form #searchPersonForm="ngForm" role="search" id="searchPerson"
+          (ngSubmit)="getPersonMovies(searchPersonForm.value)">
+      <div
+        style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        <div style="padding-top: 1.34375em; margin-right: 1em;">
+          <mat-form-field appearance="fill">
+            <mat-label>Search for an actor</mat-label>
+            <input type="text" name="search" matInput ngModel required>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="accent"
+                  type="submit">Search
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div style="display: flex; flex-direction: row; flex: 1 1 auto; justify-content: center;">
+    <div style=" flex-direction: column; justify-content: center;">
+      <div>
+        <ng-container *ngIf="movies.length !== 0; else searchNotTriedTemplate">
+          <h2 style="padding-left: 2em;">
+            <u>
+              List of found movies:
+            </u>
+          </h2>
+          <div style="flex-direction: row; flex-wrap: wrap;">
+            <div *ngFor="let movie of movies">
+              <app-movie [titlePreviouslySearched]="titlePreviouslySearched"
+                         (myEvent)="getMovies($event)"
+                         [movie]="movie"></app-movie>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #searchNotTriedTemplate>
+          <ng-container *ngIf="searchNotTried; else movieNotFound"></ng-container>
+        </ng-template>
+
+        <ng-template #movieNotFound>
+          <div
+            style="display: flex; flex-direction: column; flex: 1 1 auto; justify-content: center;  padding: 50px 0;">
+            <mat-card style="width: fit-content;">
+              <p>Unfortunately, there is no such a movie in a database <span
+                style="padding-top: 5px;"
+                class="material-icons">sentiment_dissatisfied</span>
+              </p></mat-card>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div>
+      <ng-container *ngIf="personMovies.length !== 0; else searchPersonNotTriedTemplate">
+        <h2 style="padding-left: 2em;">
+          <u>
+            Person movies:
+          </u>
+        </h2>
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+          <app-person [personPreviouslySearched]="personPreviouslySearched"
+                      [personMovies]="personMovies"></app-person>
+        </div>
+      </ng-container>
+
+      <ng-template #searchPersonNotTriedTemplate>
+        <ng-container *ngIf="personSearchNotTried; else movieForPersonNotFound"></ng-container>
+      </ng-template>
+
+      <ng-template #movieForPersonNotFound>
+        <div
+          style="display: flex; flex-direction: column; flex: 1 1 auto; justify-content: center;">
+          <mat-card style="width: fit-content;">
+            <p>Unfortunately, there is no such person in a database <span style="padding-top: 5px;"
+                                                                          class="material-icons">sentiment_dissatisfied</span>
+            </p></mat-card>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

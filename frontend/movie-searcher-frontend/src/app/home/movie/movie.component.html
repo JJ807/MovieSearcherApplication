@@ -1,0 +1,45 @@
+<div style="padding-left: 2em;" id="profileForm" class="flex-container flex-direction-column">
+  <mat-card style="padding: 1.5em; width: 30vw;" class="mat-card-styling">
+    <mat-card-header>
+      <div id="headerRow"
+           style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; flex: 1 1 auto;">
+        <div style="display: flex; flex-direction: row;">
+          <div style="display: flex; flex-direction: column;">
+            <mat-card-title>{{ movie.title }}</mat-card-title>
+            <mat-card-subtitle>{{ movie.tagline }}</mat-card-subtitle>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex; flex-direction: row;">
+            <p style="margin-right: 20px; margin-left: 20px;">Likes: {{movie.likes ? movie.likes : 0}}</p>
+            <button color="primary" style="width:100px; height: 50px;" (click)="likeMovie()" mat-raised-button>Like</button>
+          </div>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; flex-direction: column;">
+          <h4>
+            {{movie.released}}
+          </h4>
+          <img src="../../../assets/posters/{{movie.title}}.jpg" height="200px" width="150px"
+               alt="poster"/>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <h4>Cast:</h4>
+          <ul>
+            <li *ngFor="let person of movie.cast">
+              <p style="font-size: 16px;"> {{
+                person.name + " " + person.job + (person.job === "acted" ? " as " + person.role
+                  : "")
+                }}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

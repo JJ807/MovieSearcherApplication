@@ -1,0 +1,27 @@
+<div *ngFor="let personMovie of personMovies">
+  <mat-card style="padding: 1.5em; margin-bottom: 1.5em; width: 20vw;" class="mat-card-styling">
+    <mat-card-header>
+      <div id="headerRow"
+           style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; flex: 1 1 auto;">
+        <div style="display: flex; flex-direction: row;">
+          <div style="display: flex; flex-direction: column;">
+            <mat-card-title>{{ personMovie.title }}</mat-card-title>
+            <mat-card-subtitle>{{ personMovie.tagline }}</mat-card-subtitle>
+          </div>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; flex-direction: column;">
+          <h4>
+            {{personMovie.released}}
+          </h4>
+          <img src="../../../assets/posters/{{personMovie.title}}.jpg" height="200px" width="150px"
+               (error)=changeSource($event)
+               alt="poster"/>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
