@@ -3,9 +3,9 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {forkJoin, Observable, of} from "rxjs";
 import {catchError} from "rxjs/operators";
 
-const API_SEARCH_MOVIE_URL = 'https://movie-searcher-application.herokuapp.com:37036/searchMovie';
-const API_SEARCH_PERSON_URL = 'https://movie-searcher-application.herokuapp.com:37036/searchPerson';
-const API_MOVIE_URL = 'https://movie-searcher-application.herokuapp.com:37036/movie';
+const API_SEARCH_MOVIE_URL = 'https://movie-searcher-application.herokuapp.com/searchMovie';
+const API_SEARCH_PERSON_URL = 'https://movie-searcher-application.herokuapp.com/searchPerson';
+const API_MOVIE_URL = 'https://movie-searcher-application.herokuapp.com/movie';
 
 
 export interface Person {
