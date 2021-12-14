@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BasicMovieInfo, WholeMovieInfo} from "../home.component";
+import {WholeMovieInfo} from "../home.component";
 import {HttpClient} from "@angular/common/http";
 
-const API_VOTE_URL = 'http://localhost:8080/movie';
+const API_VOTE_URL = 'https://movie-searcher-application.herokuapp.com:37036/movie';
 
 @Component({
   selector: 'app-movie',
